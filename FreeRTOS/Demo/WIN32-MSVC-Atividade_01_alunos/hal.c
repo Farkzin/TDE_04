@@ -60,7 +60,7 @@ void InitHAL() {
 	showSignals();                         
 
 	// Cria a task que le o teclado
-	xTaskCreate(task_Key, "Key", configMINIMAL_STACK_SIZE, NULL, 1, NULL);  // Funcao, nome, pilha, parametro (nenhum), prioridade 1, handle (nao usado)
+	xTaskCreate(task_Key, "Key", configMINIMAL_STACK_SIZE, NULL, 3, NULL);  // Funcao, nome, pilha, parametro (nenhum), prioridade 3 (a maior, le a entrada primeiro), handle (nao usado)
 }                              
 
 // Metodo que retorna uma struct com o estado da alavanca e do botao de pisca-alerta

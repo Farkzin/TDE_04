@@ -98,7 +98,8 @@ int main_(void)
 	INIT(smBlink, state_BLINK_NONE); // Inicializa a máquina de estados do pisca-alerta com o estado NONE
 
 	// Cria as tasks responsáveis por controlar a máquina de estados e os sinais de pisca-alerta esquerdo e direito
-	xTaskCreate(task_StateMachine, "StateMachine", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
+	// Prioridades: teclado (3) > máquina de estados (2) > sinalizadores (1), para que no mesmo tick a entrada seja lida, depois o estado atualizado e por último as lâmpadas
+	xTaskCreate(task_StateMachine, "StateMachine", configMINIMAL_STACK_SIZE, NULL, 2, NULL);
 	xTaskCreate(task_BlinkLeft,    "BlinkLeft",    configMINIMAL_STACK_SIZE, NULL, 1, NULL);
 	xTaskCreate(task_BlinkRight,   "BlinkRight",   configMINIMAL_STACK_SIZE, NULL, 1, NULL);
 
