@@ -1,0 +1,56 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Projects\\TDE_04\\FreeRTOSv9.0-2.0PUCPR\\FreeRTOSv9.0-2.0\\FreeRTOS\\Demo\\WIN32-MSVC-Atividade_01_alunos\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C686325E-3261-42F7-AEB1-DDE5280E1CEB}|WIN32.vcxproj|C:\\Projects\\TDE_04\\FreeRTOSv9.0-2.0PUCPR\\FreeRTOSv9.0-2.0\\FreeRTOS\\Demo\\WIN32-MSVC-Atividade_01_alunos\\example.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C686325E-3261-42F7-AEB1-DDE5280E1CEB}|WIN32.vcxproj|solutionrelative:example.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C686325E-3261-42F7-AEB1-DDE5280E1CEB}|WIN32.vcxproj|C:\\Projects\\TDE_04\\FreeRTOSv9.0-2.0PUCPR\\FreeRTOSv9.0-2.0\\FreeRTOS\\Demo\\WIN32-MSVC-Atividade_01_alunos\\hal.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C686325E-3261-42F7-AEB1-DDE5280E1CEB}|WIN32.vcxproj|solutionrelative:hal.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "example.c",
+              "DocumentMoniker": "C:\\Projects\\TDE_04\\FreeRTOSv9.0-2.0PUCPR\\FreeRTOSv9.0-2.0\\FreeRTOS\\Demo\\WIN32-MSVC-Atividade_01_alunos\\example.c",
+              "RelativeDocumentMoniker": "example.c",
+              "ToolTip": "C:\\Projects\\TDE_04\\FreeRTOSv9.0-2.0PUCPR\\FreeRTOSv9.0-2.0\\FreeRTOS\\Demo\\WIN32-MSVC-Atividade_01_alunos\\example.c",
+              "RelativeToolTip": "example.c",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2026-11-11T02:12:04.62Z",
+              "EditorCaption": "",
+              "OwnerCaption": "%3"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "hal.c",
+              "DocumentMoniker": "C:\\Projects\\TDE_04\\FreeRTOSv9.0-2.0PUCPR\\FreeRTOSv9.0-2.0\\FreeRTOS\\Demo\\WIN32-MSVC-Atividade_01_alunos\\hal.c",
+              "RelativeDocumentMoniker": "hal.c",
+              "ToolTip": "C:\\Projects\\TDE_04\\FreeRTOSv9.0-2.0PUCPR\\FreeRTOSv9.0-2.0\\FreeRTOS\\Demo\\WIN32-MSVC-Atividade_01_alunos\\hal.c",
+              "RelativeToolTip": "hal.c",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2026-11-11T02:12:02.482Z",
+              "EditorCaption": "",
+              "OwnerCaption": "%3"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
