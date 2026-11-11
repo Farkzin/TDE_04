@@ -54,10 +54,11 @@ STATE(state_BLINK_ALERT) {
 
 // Função que retorna TRUE se a fase do pisca-alerta estiver acesa
 static boolean faseAcesa(void) {
-	// Calcula com base nos ticks do FreeRTOS, do tempo
+	// Cálculo: divide o tempo atual em ticks pelo tempo de inversão em ticks e pega o resto da divisão por 2 para alternar entre TRUE e FALSE
 	return (boolean)((xTaskGetTickCount() / (TEMPO_INVERTER_MS / portTICK_PERIOD_MS)) % 2);
 }
 
+// Task que controla o pisca-alerta esquerdo
 void task_BlinkLeft(void *pParam) {
 	for (;;) {
 		if (COMPARE(smBlink, state_BLINK_LEFT) || COMPARE(smBlink, state_BLINK_ALERT)) {
@@ -66,10 +67,11 @@ void task_BlinkLeft(void *pParam) {
 		else {
 			TurnSignalLeft(FALSE);
 		}
-		vTaskDelay(10 / portTICK_PERIOD_MS);
+		vTaskDelay(10 / portTICK_PERIOD_MS); // Aguarda 10 ms antes de verificar novamente o estado do pisca-alerta esquerdo
 	}
 }
 
+// Task que controla o pisca-alerta direito
 void task_BlinkRight(void *pParam) {
 	for (;;) {
 		if (COMPARE(smBlink, state_BLINK_RIGHT) || COMPARE(smBlink, state_BLINK_ALERT)) {
@@ -78,26 +80,28 @@ void task_BlinkRight(void *pParam) {
 		else {
 			TurnSignalRight(FALSE);
 		}
-		vTaskDelay(10 / portTICK_PERIOD_MS);
+		vTaskDelay(10 / portTICK_PERIOD_MS); // Aguarda 10 ms antes de verificar novamente o estado do pisca-alerta direito
 	}
 }
 
+// Task que executa a máquina de estados do pisca-alerta
 void task_StateMachine(void *pParam) {
 	for (;;) {
 		EXEC(smBlink);
-		vTaskDelay(10 / portTICK_PERIOD_MS);
+		vTaskDelay(10 / portTICK_PERIOD_MS); // Aguarda 10 ms antes de executar novamente a máquina de estados
 	}
 }
 
 int main_(void)
 {
-	InitHAL();
-	INIT(smBlink, state_BLINK_NONE);
+	InitHAL(); 
+	INIT(smBlink, state_BLINK_NONE); // Inicializa a máquina de estados do pisca-alerta com o estado NONE
 
+	// Cria as tasks responsáveis por controlar a máquina de estados e os sinais de pisca-alerta esquerdo e direito
 	xTaskCreate(task_StateMachine, "StateMachine", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
 	xTaskCreate(task_BlinkLeft,    "BlinkLeft",    configMINIMAL_STACK_SIZE, NULL, 1, NULL);
 	xTaskCreate(task_BlinkRight,   "BlinkRight",   configMINIMAL_STACK_SIZE, NULL, 1, NULL);
 
-	vTaskStartScheduler();
+	vTaskStartScheduler(); // Inicia o escalonador do FreeRTOS, que passa a executar as tasks criadas
 	return 0;
 }
