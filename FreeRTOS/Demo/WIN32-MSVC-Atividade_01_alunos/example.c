@@ -1,20 +1,20 @@
-
 #include "FreeRTOS.h"
 #include "task.h"
-
 #include "basic_io.h"
 #include "hal.h"
 #include "sm.h"
 
-#define TEMPO_INVERTER_MS	333
+#define TEMPO_INVERTER_MS	333 // Tempo em milissegundos para inverter o estado do pisca-alerta (1.5 Hz)
 
-StateMachine smBlink;
+StateMachine smBlink; // Variável do tipo struct que possui um ponteiro para a função do estado atual e um indicador de primeira execução
 
+// Declaração dos estados da máquina de estados
 STATE(state_BLINK_NONE);
 STATE(state_BLINK_LEFT);
 STATE(state_BLINK_RIGHT);
 STATE(state_BLINK_ALERT);
 
+// Estado em que nenhum sinalizador está ativo
 STATE(state_BLINK_NONE) {
 	tuCommand cmd = getTurnCommand();
 
@@ -23,6 +23,7 @@ STATE(state_BLINK_NONE) {
 	else if (cmd.TurnCommands == command_Right)     NEXT_STATE(state_BLINK_RIGHT);
 }
 
+// Estado em que o sinalizador esquerdo está ativo
 STATE(state_BLINK_LEFT) {
 	tuCommand cmd = getTurnCommand();
 
@@ -31,6 +32,7 @@ STATE(state_BLINK_LEFT) {
 	else if (cmd.TurnCommands == command_None)      NEXT_STATE(state_BLINK_NONE);
 }
 
+// Estado em que o sinalizador direito está ativo
 STATE(state_BLINK_RIGHT) {
 	tuCommand cmd = getTurnCommand();
 
@@ -39,6 +41,7 @@ STATE(state_BLINK_RIGHT) {
 	else if (cmd.TurnCommands == command_None)      NEXT_STATE(state_BLINK_NONE);
 }
 
+// Estado em que o sinalizador de alerta está ativo
 STATE(state_BLINK_ALERT) {
 	tuCommand cmd = getTurnCommand();
 
@@ -49,7 +52,9 @@ STATE(state_BLINK_ALERT) {
 	}
 }
 
+// Função que retorna TRUE se a fase do pisca-alerta estiver acesa
 static boolean faseAcesa(void) {
+	// Calcula com base nos ticks do FreeRTOS, do tempo
 	return (boolean)((xTaskGetTickCount() / (TEMPO_INVERTER_MS / portTICK_PERIOD_MS)) % 2);
 }
 

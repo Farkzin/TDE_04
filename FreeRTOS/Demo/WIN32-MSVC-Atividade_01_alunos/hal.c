@@ -68,35 +68,30 @@ tuCommand getTurnCommand() {
 	return lastCommand;         
 }                             
 
-/* Liga ou desliga o sinalizador direito.
-- s: estado do sinalizador (TRUE = acende / FALSE = apaga)
-*/
-void TurnSignalRight(boolean s) {       // Recebe TRUE para acender ou FALSE para apagar
-	// So atualiza a tela se o valor realmente mudou
-	if (pinTurnSignal_RIGHT != s) {     // Se o pino direito esta diferente do valor pedido...
-		pinTurnSignal_RIGHT = s;        // ...grava o novo valor no pino
-		showSignals();                  // ...e atualiza a tela
-	}                                   // Se for igual, nao faz nada (evita linhas repetidas na tela)
-}                                       // Fim de TurnSignalRight
+// Função que liga ou desliga o sinalizador direito
+void TurnSignalRight(boolean s) {      
+	if (pinTurnSignal_RIGHT != s) { // Se o pino direito esta diferente do valor pedido, atualiza o valor e a tela
+		pinTurnSignal_RIGHT = s;        
+		showSignals();                  
+	}                                   
+}                                  
 
-/* Liga ou desliga o sinalizador esquerdo.
-- s: estado do sinalizador (TRUE = acende / FALSE = apaga)
-*/
-void TurnSignalLeft(boolean s) {        // Recebe TRUE para acender ou FALSE para apagar
-	if (pinTurnSignal_LEFT != s) {      // Se o pino esquerdo esta diferente do valor pedido...
-		pinTurnSignal_LEFT = s;         // ...grava o novo valor no pino
-		showSignals();                  // ...e atualiza a tela
-	}                                   // Se for igual, nao faz nada
-}                                       // Fim de TurnSignalLeft
+// Função que liga ou desliga o sinalizador esquerdo
+void TurnSignalLeft(boolean s) {        
+	if (pinTurnSignal_LEFT != s) { // Se o pino esquerdo esta diferente do valor pedido, atualiza o valor e a tela
+		pinTurnSignal_LEFT = s;         
+		showSignals();                  
+	}                                   
+}                                       
 
-// Inverte o estado do sinalizador direito. Se estava apagado, acende. Se estava aceso, apaga.
-void ToggleTurnSignalRight() {                      // Nao recebe parametro: so inverte
-	pinTurnSignal_RIGHT = !pinTurnSignal_RIGHT;     // O "!" troca TRUE por FALSE e FALSE por TRUE
-	showSignals();                                  // Como o valor sempre muda, sempre atualiza a tela
-}                                                   // Fim de ToggleTurnSignalRight
+// Inverte o estado do sinalizador direito e atualiza a tela
+void ToggleTurnSignalRight() {                 
+	pinTurnSignal_RIGHT = !pinTurnSignal_RIGHT;
+	showSignals();                             
+}                                              
 
-// Inverte o estado do sinalizador esquerdo. Se estava apagado, acende. Se estava aceso, apaga.
-void ToggleTurnSignalLeft() {                       // Nao recebe parametro: so inverte
-	pinTurnSignal_LEFT = !pinTurnSignal_LEFT;       // O "!" troca TRUE por FALSE e FALSE por TRUE
-	showSignals();                                  // Como o valor sempre muda, sempre atualiza a tela
-}                                                   // Fim de ToggleTurnSignalLeft
+// Inverte o estado do sinalizador esquerdo e atualiza a tela
+void ToggleTurnSignalLeft() {                       
+	pinTurnSignal_LEFT = !pinTurnSignal_LEFT;       
+	showSignals();                                  
+}                                                   
