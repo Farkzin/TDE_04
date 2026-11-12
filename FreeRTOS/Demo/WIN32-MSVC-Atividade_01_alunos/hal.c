@@ -13,7 +13,7 @@ tuCommand lastCommand;          // Guarda a posicao da alavanca e do botao de pi
 static void showSignals(void) {
 	char texto[80];             // cria uma string para guardar o texto que sera mostrado na tela
 
-	// No pisca-alerta as duas lampadas mudam juntas: se so uma mudou ate agora, espera a outra para imprimir uma linha so
+	// No pisca-alerta, so imprime quando as duas lampadas estiverem iguais (as duas ja mudaram)
 	if (lastCommand.Alert && pinTurnSignal_LEFT != pinTurnSignal_RIGHT) {
 		return;
 	}
