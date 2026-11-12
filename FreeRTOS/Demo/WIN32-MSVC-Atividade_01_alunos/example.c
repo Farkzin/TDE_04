@@ -52,35 +52,41 @@ STATE(state_BLINK_ALERT) {
 	}
 }
 
-// Função que retorna TRUE se a fase do pisca-alerta estiver acesa
-static boolean faseAcesa(void) {
-	// Cálculo: divide o tempo atual em ticks pelo tempo de inversão em ticks e pega o resto da divisão por 2 para alternar entre TRUE e FALSE
-	return (boolean)((xTaskGetTickCount() / (TEMPO_INVERTER_MS / portTICK_PERIOD_MS)) % 2);
+// Função que retorna TRUE se a fase do pisca-alerta estiver acesa no instante (tick) informado
+static boolean faseAcesa(TickType_t tick) {
+	// Cálculo: divide o tick pelo tempo de inversão em ticks e pega o resto da divisão por 2 para alternar entre TRUE e FALSE
+	return (boolean)((tick / (TEMPO_INVERTER_MS / portTICK_PERIOD_MS)) % 2);
 }
 
 // Task que controla o pisca-alerta esquerdo
 void task_BlinkLeft(void *pParam) {
+	TickType_t xLastWakeTime = 0; // As duas tasks começam no mesmo tick (0) para ficarem sincronizadas
+
 	for (;;) {
 		if (COMPARE(smBlink, state_BLINK_LEFT) || COMPARE(smBlink, state_BLINK_ALERT)) {
-			TurnSignalLeft(faseAcesa());
+			// Usa o tick em que a task acordou (igual nas duas tasks), e não o tick atual, para as duas calcularem sempre a mesma fase
+			TurnSignalLeft(faseAcesa(xLastWakeTime));
 		}
 		else {
 			TurnSignalLeft(FALSE);
 		}
-		vTaskDelay(10 / portTICK_PERIOD_MS); // Aguarda 10 ms antes de verificar novamente o estado do pisca-alerta esquerdo
+		vTaskDelayUntil(&xLastWakeTime, 10 / portTICK_PERIOD_MS); // Acorda a cada 10 ms exatos, no mesmo tick que a task do pisca direito
 	}
 }
 
 // Task que controla o pisca-alerta direito
 void task_BlinkRight(void *pParam) {
+	TickType_t xLastWakeTime = 0; // As duas tasks começam no mesmo tick (0) para ficarem sincronizadas
+
 	for (;;) {
 		if (COMPARE(smBlink, state_BLINK_RIGHT) || COMPARE(smBlink, state_BLINK_ALERT)) {
-			TurnSignalRight(faseAcesa());
+			// Usa o tick em que a task acordou (igual nas duas tasks), e não o tick atual, para as duas calcularem sempre a mesma fase
+			TurnSignalRight(faseAcesa(xLastWakeTime));
 		}
 		else {
 			TurnSignalRight(FALSE);
 		}
-		vTaskDelay(10 / portTICK_PERIOD_MS); // Aguarda 10 ms antes de verificar novamente o estado do pisca-alerta direito
+		vTaskDelayUntil(&xLastWakeTime, 10 / portTICK_PERIOD_MS); // Acorda a cada 10 ms exatos, no mesmo tick que a task do pisca esquerdo
 	}
 }
 
