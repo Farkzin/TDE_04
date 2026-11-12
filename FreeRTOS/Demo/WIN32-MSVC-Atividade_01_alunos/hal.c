@@ -13,7 +13,7 @@ tuCommand lastCommand;          // Guarda a posicao da alavanca e do botao de pi
 static void showSignals(void) {
 	char texto[80];             // cria uma string para guardar o texto que sera mostrado na tela
 
-	// No pisca-alerta, so imprime quando as duas lampadas estiverem iguais (as duas ja mudaram)
+	// Se o alerta estiver ativo e as duas lâmpadas estiverem diferentes, não mostra nada ainda
 	if (lastCommand.Alert && pinTurnSignal_LEFT != pinTurnSignal_RIGHT) {
 		return;
 	}
@@ -33,22 +33,16 @@ void task_Key(void *pParam){
 
 			tecla = _getch();   // Le a tecla apertada e guarda em tecla
 
-			if (tecla == 'l' || tecla == 'L') {          
-				lastCommand.TurnCommands = command_Left; 
-			}                                            
-			else if (tecla == 'r' || tecla == 'R') {     
-				lastCommand.TurnCommands = command_Right;
-			}                                            
-			else if (tecla == ' ') {                     
-				lastCommand.TurnCommands = command_None; 
-			}                                            
-			else if (tecla == 'a' || tecla == 'A') {     
-				lastCommand.Alert = !lastCommand.Alert; // Inverte o estado do alerta
-			}                                            
+			switch (tecla) {
+				case 'l': case 'L': lastCommand.TurnCommands = command_Left;  break;
+				case 'r': case 'R': lastCommand.TurnCommands = command_Right; break;
+				case ' ':           lastCommand.TurnCommands = command_None;  break;
+				case 'a': case 'A': lastCommand.Alert = !lastCommand.Alert;   break; // Inverte o estado do alerta
+			}
 		}
 
-		// Espera 10 ms para nao ocupar todo o processador
-		vTaskDelay(10 / portTICK_PERIOD_MS);    
+		// Espera 10 ms para as outras tasks do FreeRTOS serem executadas
+		vTaskDelay(10);    
 	}                    
 }                             
 
@@ -65,7 +59,7 @@ void InitHAL() {
 	showSignals();                         
 
 	// Cria a task que le o teclado
-	xTaskCreate(task_Key, "Key", configMINIMAL_STACK_SIZE, NULL, 3, NULL);  // Funcao, nome, pilha, parametro (nenhum), prioridade 3 (a maior, le a entrada primeiro), handle (nao usado)
+	xTaskCreate(task_Key, "Key", configMINIMAL_STACK_SIZE, NULL, 3, NULL);  // Funcao, nome, pilha, parametro (nenhum), prioridade 3, handle (nao usado)
 }                              
 
 // Metodo que retorna uma struct com o estado da alavanca e do botao de pisca-alerta

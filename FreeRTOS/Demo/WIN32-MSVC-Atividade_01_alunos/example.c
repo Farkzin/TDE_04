@@ -52,10 +52,9 @@ STATE(state_BLINK_ALERT) {
 	}
 }
 
-// Função que retorna TRUE se a fase do pisca-alerta estiver acesa
+// Função que inverte a lampada a cada 333 ms (1.5 Hz)
 static boolean faseAcesa(void) {
-	// Cálculo: divide o tempo atual em ticks pelo tempo de inversão em ticks e pega o resto da divisão por 2 para alternar entre TRUE e FALSE
-	return (boolean)((xTaskGetTickCount() / (TEMPO_INVERTER_MS / portTICK_PERIOD_MS)) % 2);
+	return (xTaskGetTickCount() / TEMPO_INVERTER_MS) % 2; // Pega o resto da divisão inteira do tempo atual pelo tempo de inversão
 }
 
 // Task que controla o pisca-alerta esquerdo
@@ -67,7 +66,7 @@ void task_BlinkLeft(void *pParam) {
 		else {
 			TurnSignalLeft(FALSE);
 		}
-		vTaskDelay(10 / portTICK_PERIOD_MS); // Aguarda 10 ms antes de verificar novamente o estado do pisca-alerta esquerdo
+		vTaskDelay(10); // Espera 10 ms para as outras tasks do FreeRTOS serem executadas
 	}
 }
 
@@ -80,7 +79,7 @@ void task_BlinkRight(void *pParam) {
 		else {
 			TurnSignalRight(FALSE);
 		}
-		vTaskDelay(10 / portTICK_PERIOD_MS); // Aguarda 10 ms antes de verificar novamente o estado do pisca-alerta direito
+		vTaskDelay(10); // Espera 10 ms para as outras tasks do FreeRTOS serem executadas
 	}
 }
 
@@ -88,7 +87,7 @@ void task_BlinkRight(void *pParam) {
 void task_StateMachine(void *pParam) {
 	for (;;) {
 		EXEC(smBlink);
-		vTaskDelay(10 / portTICK_PERIOD_MS); // Aguarda 10 ms antes de executar novamente a máquina de estados
+		vTaskDelay(10); // Espera 10 ms para as outras tasks do FreeRTOS serem executadas
 	}
 }
 
