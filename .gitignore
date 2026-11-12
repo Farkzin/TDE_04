@@ -1,0 +1,6 @@
+# Visual Studio (cache, IntelliSense, configuracoes locais da IDE)
+.vs/
+
+# Saida de build dos projetos do simulador Windows
+FreeRTOS/Demo/WIN32-MSVC-*/Debug/
+FreeRTOS/Demo/WIN32-MSVC-*/Release/
