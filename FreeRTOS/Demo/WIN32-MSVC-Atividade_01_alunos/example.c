@@ -8,8 +8,9 @@
 
 StateMachine smBlink; // Variável do tipo struct que possui um ponteiro para a função do estado atual e um indicador de primeira execução
 
-TaskHandle_t xHandleBlinkLeft  = NULL; // Handle (manuseador) da task do pisca esquerdo. NULL significa que a task não existe
-TaskHandle_t xHandleBlinkRight = NULL; // Handle (manuseador) da task do pisca direito. NULL significa que a task não existe
+// Handle's para saber se as tasks existem ou não
+TaskHandle_t xHandleBlinkLeft  = NULL;
+TaskHandle_t xHandleBlinkRight = NULL; 
 
 // Declaração dos estados da máquina de estados
 STATE(state_BLINK_NONE);
@@ -22,7 +23,7 @@ static boolean faseAcesa(void) {
 	return (xTaskGetTickCount() / TEMPO_INVERTER_MS) % 2; // Pega o resto da divisão inteira do tempo atual pelo tempo de inversão
 }
 
-// Task que controla o pisca-alerta esquerdo. Ela só existe enquanto o pisca esquerdo precisa estar ativo, por isso não precisa consultar a máquina de estados
+// Task que controla o pisca-alerta esquerdo. Apenas acende a lampada enquanto a task existir
 void task_BlinkLeft(void *pParam) {
 	for (;;) {
 		TurnSignalLeft(faseAcesa());
@@ -30,7 +31,7 @@ void task_BlinkLeft(void *pParam) {
 	}
 }
 
-// Task que controla o pisca-alerta direito. Ela só existe enquanto o pisca direito precisa estar ativo, por isso não precisa consultar a máquina de estados
+// Task que controla o pisca-alerta direito. Apenas acende a lampada enquanto a task existir
 void task_BlinkRight(void *pParam) {
 	for (;;) {
 		TurnSignalRight(faseAcesa());
@@ -38,21 +39,21 @@ void task_BlinkRight(void *pParam) {
 	}
 }
 
-// Cria dinamicamente a task do pisca esquerdo (se ela ainda não existir)
+// Se a task do pisca esquerdo não existir, cria dinamicamente a task do pisca esquerdo
 static void startBlinkLeft(void) {
 	if (xHandleBlinkLeft == NULL) {
 		xTaskCreate(task_BlinkLeft, "BlinkLeft", configMINIMAL_STACK_SIZE, NULL, 1, &xHandleBlinkLeft); // Guarda o handle para poder deletar a task depois
 	}
 }
 
-// Cria dinamicamente a task do pisca direito (se ela ainda não existir)
+// Se a task do pisca direito não existir, cria dinamicamente a task do pisca direito
 static void startBlinkRight(void) {
 	if (xHandleBlinkRight == NULL) {
 		xTaskCreate(task_BlinkRight, "BlinkRight", configMINIMAL_STACK_SIZE, NULL, 1, &xHandleBlinkRight); // Guarda o handle para poder deletar a task depois
 	}
 }
 
-// Deleta a task do pisca esquerdo (se ela existir) e apaga a lampada, pois a task não faz mais isso
+// Se a task do pisca esquerdo existir, deleta a task do pisca esquerdo e apaga a lampada
 static void stopBlinkLeft(void) {
 	if (xHandleBlinkLeft != NULL) {
 		vTaskDelete(xHandleBlinkLeft); // Deleta a task usando o handle guardado na criação
@@ -61,7 +62,7 @@ static void stopBlinkLeft(void) {
 	TurnSignalLeft(FALSE);             // A lampada pode ter ficado acesa quando a task foi deletada
 }
 
-// Deleta a task do pisca direito (se ela existir) e apaga a lampada, pois a task não faz mais isso
+// Se a task do pisca direito existir, deleta a task do pisca direito e apaga a lampada
 static void stopBlinkRight(void) {
 	if (xHandleBlinkRight != NULL) {
 		vTaskDelete(xHandleBlinkRight); // Deleta a task usando o handle guardado na criação
@@ -136,20 +137,15 @@ STATE(state_BLINK_ALERT) {
 	}
 }
 
-// Executa a máquina de estados do pisca-alerta. É chamada pela Idle Hook (vApplicationIdleHook em main.c), ou seja, só roda quando nenhuma outra task precisa do processador
-// Não pode bloquear (sem vTaskDelay) e precisa sempre retornar, para a Idle Task continuar fazendo a limpeza das tasks deletadas
+// Executa a máquina de estados do pisca-alerta no Idle Hook
 void idle_StateMachine(void) {
 	EXEC(smBlink);
 }
 
 int main_(void)
 {
-	InitHAL(); // Cria a task do teclado (prioridade 3)
-	INIT(smBlink, state_BLINK_NONE); // Inicializa a máquina de estados do pisca-alerta com o estado NONE
-
-	// Nenhuma task do pisca é criada aqui: a máquina de estados cria e deleta task_BlinkLeft e task_BlinkRight dinamicamente (prioridade 1), conforme os comandos recebidos
-	// Prioridades: teclado (3) > sinalizadores (1) > máquina de estados (Idle Task, 0), que só executa quando todas as outras tasks estão bloqueadas
-
+	InitHAL(); 
+	INIT(smBlink, state_BLINK_NONE); // Inicializa a máquina de estados do pisca-alerta no estado NONE
 	vTaskStartScheduler(); // Inicia o escalonador do FreeRTOS, que passa a executar as tasks criadas
 	return 0;
 }

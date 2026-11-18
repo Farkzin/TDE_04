@@ -186,7 +186,7 @@ void vApplicationIdleHook( void )
 	because it is the responsibility of the idle task to clean up memory
 	allocated by the kernel to any task that has since deleted itself. */
 
-	// Executa a maquina de estados do pisca-alerta. Nao pode bloquear e precisa retornar sempre, pois a Idle Task tambem libera a memoria das tasks deletadas
+	// Executa a maquina de estados do pisca-alerta
 	idle_StateMachine();
 
 	/* Uncomment the following code to allow the trace to be stopped with any
