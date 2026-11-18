@@ -104,6 +104,9 @@ static void  prvInitialiseHeap( void );
  */
 void vApplicationMallocFailedHook( void );
 void vApplicationIdleHook( void );
+
+// Funcao da aplicacao (example.c) que executa a maquina de estados do pisca-alerta dentro da Idle Hook
+extern void idle_StateMachine( void );
 void vApplicationStackOverflowHook( TaskHandle_t pxTask, char *pcTaskName );
 void vApplicationTickHook( void );
 void vApplicationGetIdleTaskMemory( StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize );
@@ -182,6 +185,9 @@ void vApplicationIdleHook( void )
 	that vApplicationIdleHook() is permitted to return to its calling function,
 	because it is the responsibility of the idle task to clean up memory
 	allocated by the kernel to any task that has since deleted itself. */
+
+	// Executa a maquina de estados do pisca-alerta. Nao pode bloquear e precisa retornar sempre, pois a Idle Task tambem libera a memoria das tasks deletadas
+	idle_StateMachine();
 
 	/* Uncomment the following code to allow the trace to be stopped with any
 	key press.  The code is commented out by default as the kbhit() function
