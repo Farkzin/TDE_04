@@ -63,6 +63,11 @@ def build_html() -> str:
                 f"<pre>{html.escape((PROJECT / 'outputs' / 'run_history.csv').read_text(encoding='utf-8'))}</pre>"]
     for log in sorted((PROJECT / "logs").glob("*.log")):
         appendix.append(f"<h3>{log.name}</h3><pre>{html.escape(log.read_text(encoding='utf-8'))}</pre>")
+    appendix.append('<h2>Appendix D – Saved API response and metadata (data/external/open_meteo)</h2>')
+    for js in sorted((PROJECT / "data" / "external" / "open_meteo").glob("*.json")):
+        appendix.append(f"<h3>{js.name}</h3><pre>{html.escape(js.read_text(encoding='utf-8'))}</pre>")
+    appendix.append('<h2>Appendix E – Run manifest</h2>'
+                    f"<pre>{html.escape((run / 'run_manifest.json').read_text(encoding='utf-8'))}</pre>")
     cover = f"""<div class="cover">
 <div class="sub">AI-ASSISTED PYTHON FOR BUSINESS PROBLEM SOLVING</div>
 <h1>Evaluation Project – LO 2</h1>
