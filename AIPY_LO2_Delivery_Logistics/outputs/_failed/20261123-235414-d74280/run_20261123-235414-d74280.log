@@ -1,9 +1,0 @@
-2026-11-23 23:54:14 | INFO    | RUN 20261123-235414-d74280 STARTED
-2026-11-23 23:54:14 | INFO    | Paths: input=C:\Projects\TDE_04\AIPY_LO2_Delivery_Logistics\data\demo_invalid_batch output=C:\Projects\TDE_04\AIPY_LO2_Delivery_Logistics\outputs external=C:\Projects\TDE_04\AIPY_LO2_Delivery_Logistics\data\external\open_meteo
-2026-11-23 23:54:14 | INFO    | Stage 1 - acquisition: 2 input files in C:\Projects\TDE_04\AIPY_LO2_Delivery_Logistics\data\demo_invalid_batch: ['deliveries_2026-10-05_to_2026-10-11.csv', 'deliveries_2026-10-12_to_2026-10-18.csv']
-2026-11-23 23:54:14 | INFO    | Stage 2 - validation: ST3 cleaning + rules V1, V2, V3, V4, V5, V6
-2026-11-23 23:54:14 | INFO    | Processing deliveries_2026-10-05_to_2026-10-11.csv
-2026-11-23 23:54:14 | INFO    |   deliveries_2026-10-05_to_2026-10-11.csv: raw=44, duplicates removed=1, excluded=2, valid=41
-2026-11-23 23:54:14 | INFO    | Processing deliveries_2026-10-12_to_2026-10-18.csv
-2026-11-23 23:54:14 | ERROR   | RUN 20261123-235414-d74280 FAILED: BatchRejectedError: [V1] deliveries_2026-10-12_to_2026-10-18.csv: incompatible columns - missing ['package_weight_kg'], unexpected []
-2026-11-23 23:54:14 | ERROR   | Nothing was published. Latest successful run is unchanged.

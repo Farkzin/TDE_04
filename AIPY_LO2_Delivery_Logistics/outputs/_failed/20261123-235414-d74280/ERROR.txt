@@ -1,1 +1,0 @@
-BatchRejectedError: [V1] deliveries_2026-10-12_to_2026-10-18.csv: incompatible columns - missing ['package_weight_kg'], unexpected []
