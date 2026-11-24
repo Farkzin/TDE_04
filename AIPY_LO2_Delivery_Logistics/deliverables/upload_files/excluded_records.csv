@@ -1,0 +1,7 @@
+﻿delivery_id,request_date,customer,district,distance_km,package_weight_kg,vehicle,delivery_minutes,source_file,source_row,exclusion_reason
+DLV-1033,2026-10-10,Clínica Sorriso,Batel,0.0,16.84,Van,26,deliveries_2026-10-05_to_2026-10-11.csv,35,distance_km <= 0
+DLV-1038,2026-10-10,Mercado Central,Cabral,6.5,-1.5,Van,34,deliveries_2026-10-05_to_2026-10-11.csv,40,package_weight_kg <= 0
+DLV-1020,2026-10-07,Clínica Sorriso,Campo Comprido,16.9,22.25,Van,56,deliveries_2026-10-05_to_2026-10-11.csv,22,exact duplicate of an earlier row
+DLV-1047,2026-10-12,Clínica Sorriso,Rebouças,-3.2,16.78,Van,26,deliveries_2026-10-12_to_2026-10-18.csv,5,distance_km <= 0
+DLV-1078,2026-10-17,Café do Bairro,Pinheirinho,14.1,7.39,Car,0,deliveries_2026-10-12_to_2026-10-18.csv,37,delivery_minutes <= 0
+DLV-1052,2026-10-13,Pet Shop Amigo,Pinheirinho,15.7,3.35,Motorcycle,54,deliveries_2026-10-12_to_2026-10-18.csv,11,exact duplicate of an earlier row

@@ -1,0 +1,59 @@
+==============================================================================
+DELIVERY BATCH REPORT (ST4) - Delivery and Logistics Management
+==============================================================================
+Run ID ............ 20261123-235408-c5d784
+Generated at ...... 2026-11-23T23:54:09-03:00
+Status ............ SUCCESS - rules V1, V2, V3, V4, V5, V6 passed before publication
+Source mode ....... local CSV exports from data/raw (no external data in ST4)
+Intended user ..... dispatch / operations coordinator (weekly closing of delivery quotations)
+
+SOURCE FILES (2)
+  - deliveries_2026-10-05_to_2026-10-11.csv  period 2026-10-05..2026-10-11  raw=44  duplicates removed=1  excluded=2  valid=41  sha256=bb0988198a0f...
+  - deliveries_2026-10-12_to_2026-10-18.csv  period 2026-10-12..2026-10-18  raw=39  duplicates removed=1  excluded=2  valid=36  sha256=2f1e368b1914...
+
+SCOPE
+  77 valid deliveries requested from 2026-10-05 to 2026-10-18. Prices use the ST1 formula (R$ 8.00 + R$ 1.50/km + R$ 2.00/kg) plus the ST2 zone fee.
+  6 raw rows were not used: 2 exact duplicates and 4 business-invalid rows (see excluded_records.csv for the reason of each one).
+
+VALIDATION RULES APPLIED
+  V1 PASS - Schema: every file has exactly the required columns (compatible structure for one batch).
+  V2 PASS - Types: distance, weight and minutes are present and numeric after ST3 text cleaning.
+  V3 PASS - Period: every request_date is a valid date inside the period stated in the file name.
+  V4 PASS - Key: delivery_id is filled and unique across the whole batch after exact duplicates are removed.
+  V5 PASS - Quality: business-invalid rows (<= 0 values) are at most 10% of a file.
+  V6 PASS - Consistency: final cost = base + distance + weight + zone fee and zones match the ST2 thresholds.
+
+INDICATORS (calculated evidence)
+  1. Valid deliveries ............... 77
+  2. Total quoted revenue ........... R$ 3,766.66
+  3. Average delivery cost .......... R$ 48.92
+  4. Largest delivery cost .......... R$ 96.30
+  5. Total distance ................. 885.8 km
+  6. Extended zone share ............ 33.8% of deliveries, 45.6% of revenue
+
+SUMMARY BY SERVICE ZONE (sorted by revenue, largest first)
+service_zone  deliveries  total_distance_km  revenue_brl  average_cost_brl  revenue_share_pct
+    Extended          26              485.3      1717.01             66.04               45.6
+    Standard          33              336.6      1451.84             44.00               38.5
+       Local          18               63.9       597.81             33.21               15.9
+
+FINDING
+  Evidence: the Extended zone generated R$ 1,717.01 (45.6% of revenue) from 26 deliveries. Extended deliveries are 33.8% of the volume but 45.6% of revenue; their average cost is R$ 66.04 versus R$ 33.21 in the Local zone.
+  Interpretation: long routes bring more revenue per delivery than their volume suggests, so losing a few Extended customers would affect revenue more than losing the same number of Local ones. Long-route capacity may deserve priority when the weekly schedule is planned.
+
+LIMITATION
+  Evidence: the batch covers 14 days and 6 raw rows were excluded; amounts are quoted prices from the team-defined ST1/ST2 policy.
+  Interpretation: the figures describe quoted revenue, not profit (fuel, driver and vehicle costs are not in the data), and two weeks are not enough to show seasonality.
+
+WORKBOOK VERIFICATION (read back from the saved .xlsx)
+                           check expected observed result
+                     Detail rows       77       77   PASS
+         Detail total cost (BRL)  3766.66  3766.66   PASS
+      Detail total distance (km)    885.8    885.8   PASS
+              Summary deliveries       77       77   PASS
+           Summary revenue (BRL)  3766.66  3766.66   PASS
+Summary revenue = detail revenue  3766.66  3766.66   PASS
+          Cost column is numeric  float64  float64   PASS
+
+OUTPUT FILES: deliveries_processed.csv, excluded_records.csv, st4_delivery_batch.xlsx, st4_batch_report.txt
+==============================================================================
