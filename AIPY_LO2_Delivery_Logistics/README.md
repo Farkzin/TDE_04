@@ -58,6 +58,12 @@ Each successful run folder contains:
 python -m unittest discover -s tests -v   # 22 tests: ST1/ST2 rules, V1–V5 rejections, workbook, API, join
 ```
 
+## Submission files
+
+`deliverables/AIPY_LO2_Delivery_Logistics_Report.pdf` (report + appendices with the generated reports and logs)
+and `deliverables/AIPY_LO2_Delivery_Logistics_Project.zip` (this folder without caches). Rebuild them with
+`python tools/build_deliverables.py` (needs `pip install markdown` and Microsoft Edge).
+
 ## Project structure
 
 ```
