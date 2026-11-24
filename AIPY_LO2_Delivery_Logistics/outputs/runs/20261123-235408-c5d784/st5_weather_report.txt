@@ -1,0 +1,60 @@
+==============================================================================
+DELIVERIES x WEATHER REPORT (ST5) - Delivery and Logistics Management
+==============================================================================
+Run ID ............ 20261123-235408-c5d784
+Generated at ...... 2026-11-23T23:54:10-03:00
+Source mode ....... CACHE (cache fallback after live failure: Open-Meteo request failed: SSLError: HTTPSConnectionPool(host='archive-api.open-meteo.com', port=443): Max retries exceeded with url: /v1/archive?latitude=-25.4284&longitude=-49.2733&start_date=2026-10-05&end_date=2026-10-18&daily=precip)
+
+BUSINESS QUESTION
+  Do rainy days in Curitiba coincide with a slower delivery pace (min/km) or with a different demand?
+  The local CSVs contain dates, distances and times but no weather, so they cannot answer it alone.
+
+EXTERNAL INFORMATION
+  Provider ......... Open-Meteo (Historical Weather API, ERA5-based reanalysis)
+  Endpoint ......... GET https://archive-api.open-meteo.com/v1/archive
+  Parameters ....... {'latitude': -25.4284, 'longitude': -49.2733, 'start_date': '2026-10-05', 'end_date': '2026-10-18', 'daily': 'precipitation_sum,rain_sum,temperature_2m_max,temperature_2m_min,wind_speed_10m_max', 'timezone': 'America/Sao_Paulo'}
+  Acquired at ...... 2026-11-23T23:46:10-03:00 (GET of the same URL and parameters through the AI assistant web-fetch tool on 2026-11-23, because the corporate network of the development machine intercepts TLS (self-signed certificate) and Python requests was blocked. Response stored unmodified.)
+  Response file .... data/external/open_meteo/20261123T234610_archive_curitiba_2026-10-05_2026-10-18_response.json
+  Units ............ {'time': 'iso8601', 'precipitation_sum': 'mm', 'rain_sum': 'mm', 'temperature_2m_max': '°C', 'temperature_2m_min': '°C', 'wind_speed_10m_max': 'km/h'}
+  Use conditions ... Free API for non-commercial use (educational use qualifies); < 10,000 calls/day; data licensed under CC BY 4.0 - attribution: 'Weather data by Open-Meteo.com'. No warranty of accuracy or availability (https://open-meteo.com/en/terms).
+  Coverage ......... 2026-10-05 to 2026-10-18 (14 days, one row per day). Rain category: < 1 mm Dry, 1 to < 10 mm Light rain, >= 10 mm Heavy rain.
+
+INTEGRATION
+  One delivery row (local) is joined to one day row (weather) on date_key = request_date as YYYY-MM-DD.
+  Relationship many-to-one, left join, validated by pandas (validate='many_to_one').
+                                         check expected observed result
+          Weather key unique (one row per day)        0        0   PASS
+              Deliveries without weather match        0        0   PASS
+Row count preserved (deliveries in = rows out)       77       77   PASS
+                 Total revenue preserved (BRL)  3766.66  3766.66   PASS
+                 Total distance preserved (km)    885.8    885.8   PASS
+                      delivery_id still unique        0        0   PASS
+              Delivery days covered by weather       14       14   PASS
+
+INDICATORS BY RAIN CATEGORY (calculated evidence, sorted by pace - slowest first)
+rain_category  days  deliveries  deliveries_per_day  revenue_per_day_brl  average_minutes_per_km  precipitation_mm
+          Dry     3          13                 4.3               189.32                    4.19               0.5
+   Heavy rain     3          19                 6.3               327.38                    3.88              17.6
+   Light rain     8          45                 5.6               277.07                    3.75               4.9
+
+FINDING
+  Evidence: on rainy days (Light + Heavy, 11 days, 64 deliveries) the pace was 3.79 min/km against 4.19 min/km on dry days (3 days, 13 deliveries): a difference of -9.7%.
+  Interpretation: the evidence does not support adding a rain buffer to promised delivery times. The faster pace on rainy days should not be read as 'rain speeds deliveries up': with few dry days, a different route mix (long routes have a lower min/km) could explain the gap - this was not tested.
+
+LIMITATION
+  Evidence: only 14 days and 11 rainy days; the weather value is a daily total for one coordinate in Curitiba.
+  Interpretation: rain may have fallen outside delivery hours or in other districts, and a two-week sample cannot separate the effect of rain from the effect of the weekday or route mix (association, not cause).
+
+WORKBOOK VERIFICATION (st5_delivery_weather.xlsx read back)
+                           check expected observed result
+                     Detail rows       77       77   PASS
+         Detail total cost (BRL)  3766.66  3766.66   PASS
+      Detail total distance (km)    885.8    885.8   PASS
+              Summary deliveries       77       77   PASS
+           Summary revenue (BRL)  3766.66  3766.66   PASS
+Summary revenue = detail revenue  3766.66  3766.66   PASS
+          Cost column is numeric  float64  float64   PASS
+
+OUTPUT FILES: weather_daily.csv, deliveries_with_weather.csv, st5_delivery_weather.xlsx, st5_weather_report.txt
+Weather data by Open-Meteo.com (CC BY 4.0).
+==============================================================================

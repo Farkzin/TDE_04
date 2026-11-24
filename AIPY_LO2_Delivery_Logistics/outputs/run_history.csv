@@ -1,0 +1,3 @@
+run_id,started_at,finished_at,status,source_mode,input_files,valid_deliveries,output_folder,message
+20261123-235408-c5d784,2026-11-23T23:54:08-03:00,2026-11-23T23:54:10-03:00,SUCCESS,cache,deliveries_2026-10-05_to_2026-10-11.csv;deliveries_2026-10-12_to_2026-10-18.csv,77,runs/20261123-235408-c5d784,all stages completed and verified
+20261123-235414-d74280,2026-11-23T23:54:14-03:00,2026-11-23T23:54:14-03:00,FAILED,n/a,deliveries_2026-10-05_to_2026-10-11.csv;deliveries_2026-10-12_to_2026-10-18.csv,,_failed/20261123-235414-d74280,"BatchRejectedError: [V1] deliveries_2026-10-12_to_2026-10-18.csv: incompatible columns - missing ['package_weight_kg'], unexpected []"

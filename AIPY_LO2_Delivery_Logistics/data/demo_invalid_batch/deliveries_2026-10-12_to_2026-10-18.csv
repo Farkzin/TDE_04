@@ -1,0 +1,40 @@
+delivery_id,request_date,customer,district,distance_km,vehicle,delivery_minutes
+DLV-1044,2026-10-12,Ateliê Flor,Água Verde,5.1,Motorcycle,26
+DLV-1045,2026-10-12,Doce Sabor Confeitaria,Cabral,6.4,Motorcycle,29
+DLV-1046,2026-10-12,Padaria Bom Dia,Juvevê,4.4,Van,32
+DLV-1047,2026-10-12,Clínica Sorriso,Rebouças,-3.2,Van,26
+DLV-1048,2026-10-12,Mercado Central,Cidade Industrial,17.4,Motorcycle,50
+DLV-1049,2026-10-12,Café do Bairro,Pinheirinho,13.8,Motorcycle,47
+DLV-1050,2026-10-13,Padaria Bom Dia,Bigorrilho,4.7,Van,33
+DLV-1051,2026-10-13,Pet Shop Amigo,Sítio Cercado,17.5,Car,51
+DLV-1052,2026-10-13,Pet Shop Amigo,Pinheirinho,15.7,Motorcycle,54
+DLV-1052,2026-10-13,Pet Shop Amigo,Pinheirinho,15.7,Motorcycle,54
+DLV-1053,2026-10-13,Doce Sabor Confeitaria,Umbará,19.6, Motorcycle  ,73
+DLV-1054,2026-10-13,Farmácia Vida,Rebouças,3.1 km,Motorcycle,18
+DLV-1055,2026-10-13,Loja Tech Sul,Tatuquara,19.6,Van,76
+DLV-1056,2026-10-14,Studio Fit,Umbará,18.8,Motorcycle,69
+DLV-1057,2026-10-14,Padaria Bom Dia,Água Verde,4.0,Motorcycle,23
+DLV-1058,2026-10-14,Studio Fit,Sítio Cercado,15.3,Motorcycle,53
+DLV-1059,2026-10-14,Studio Fit,Tatuquara,20.7,motorcycle,71
+DLV-1060,2026-10-14,Pet Shop Amigo,Portão,7.3,Motorcycle,33
+DLV-1061,2026-10-14,Doce Sabor Confeitaria,Tatuquara,23.8,Van,81
+DLV-1062,2026-10-15,Loja Tech Sul,Batel,3.3,Motorcycle,18
+DLV-1063,2026-10-15,Mercado Central,Boqueirão,11.2,Motorcycle,38
+DLV-1064,2026-10-15,Mercado Central,Batel,3.2,Van,28
+DLV-1065,2026-10-15,Padaria Bom Dia,Tatuquara,21.9,Car,67
+DLV-1066,2026-10-15,,Campo Comprido,15.6,Motorcycle,50
+DLV-1067,2026-10-16,Ótica Visão,Juvevê,4.5,Van,31
+DLV-1068,2026-10-16,Doce Sabor Confeitaria,Santa Felicidade,14.4,Car,44
+DLV-1069,2026-10-16,Doce Sabor Confeitaria,Batel,3.3,Motorcycle,20
+DLV-1070,2026-10-16,Livraria Leitura,Xaxim,11.2,Car,46
+DLV-1071,2026-10-16,Livraria Leitura,Boa Vista,7.7,Van,40
+DLV-1072,2026-10-16,Ótica Visão,Cajuru,8.9,Motorcycle,37
+DLV-1073,2026-10-16,Ateliê Flor,Juvevê,5.4,Van,35
+DLV-1074,2026-10-17,Clínica Sorriso,Juvevê,5.1,Motorcycle,26
+DLV-1075,2026-10-17,Loja Tech Sul,Bairro Alto,14.8,Car,56
+DLV-1076,2026-10-17,Loja Tech Sul,JUVEVÊ,4.7,Van,32
+DLV-1077,2026-10-17,,Boqueirão,12.3,Motorcycle,40
+DLV-1078,2026-10-17,Café do Bairro,Pinheirinho,14.1,Car,0
+DLV-1079,2026-10-18,Loja Tech Sul,Água Verde,4.0,Motorcycle,22
+DLV-1080,2026-10-18,Mercado Central,  xaxim ,10.0,Motorcycle,38
+DLV-1081,2026-10-18,Padaria Bom Dia,Cidade Industrial,18.1,Van,66

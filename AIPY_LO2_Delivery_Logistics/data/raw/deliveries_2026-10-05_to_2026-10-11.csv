@@ -1,0 +1,45 @@
+delivery_id,request_date,customer,district,distance_km,package_weight_kg,vehicle,delivery_minutes
+DLV-1001,2026-10-05,Doce Sabor Confeitaria,Campo Comprido,16.0,5.22,Car,54
+DLV-1002,2026-10-05,Livraria Leitura,Pinheirinho,16.2,4.32,Motorcycle,52
+DLV-1003,2026-10-05,Studio Fit,Cajuru,9.6,7.18,Car,34
+DLV-1004,2026-10-05,Studio Fit,  sítio cercado ,19.1,0.37,Motorcycle,61
+DLV-1005,2026-10-05,Clínica Sorriso,Xaxim,10.5,1.51,Motorcycle,34
+DLV-1006,2026-10-05,Padaria Bom Dia,Santa Felicidade,15.8,4.56,Motorcycle,48
+DLV-1007,2026-10-06,Café do Bairro,Cajuru,9.5,4.64,Motorcycle,38
+DLV-1008,2026-10-06,Ateliê Flor,Boqueirão,10.3,1.98,Motorcycle,35
+DLV-1009,2026-10-06,,Tatuquara,24.0,1.88,Motorcycle,86
+DLV-1010,2026-10-06,Doce Sabor Confeitaria,Santa Felicidade,12.5,16.5,Van,54
+DLV-1011,2026-10-06,Studio Fit,Campo Comprido,19.3,2.36,Motorcycle,68
+DLV-1012,2026-10-06,Padaria Bom Dia,Boa Vista,8.3,8.24,Car,35
+DLV-1013,2026-10-06,Doce Sabor Confeitaria,Cajuru,10.8,18.08,Van,53
+DLV-1014,2026-10-07,Doce Sabor Confeitaria,Boqueirão,12.2,10.01,Car,43
+DLV-1015,2026-10-07,Mercado Central,Centro,2.0,4.1 kg,Motorcycle,15
+DLV-1016,2026-10-07,Studio Fit,Sítio Cercado,17.4,21.05,Van,64
+DLV-1017,2026-10-07,Ótica Visão,Xaxim,12.6,0.43,Motorcycle,41
+DLV-1018,2026-10-07,,Boa Vista,8.7,4.33,Motorcycle,32
+DLV-1019,2026-10-07,Padaria Bom Dia,Umbará,19.1,20.69,Van,72
+DLV-1020,2026-10-07,Clínica Sorriso,Campo Comprido,16.9,22.25,Van,56
+DLV-1020,2026-10-07,Clínica Sorriso,Campo Comprido,16.9,22.25,Van,56
+DLV-1021,2026-10-08,Ótica Visão,Centro,1.8,15.22,Van,24
+DLV-1022,2026-10-08,Mercado Central,Batel,2.7,19.23,Van,26
+DLV-1023,2026-10-08,Livraria Leitura,Água Verde,4.5,3.73,Motorcycle,25
+DLV-1024,2026-10-08,Pet Shop Amigo,Sítio Cercado,18.0,0.54,Motorcycle,56
+DLV-1025,2026-10-08,Mercado Central,Boa Vista,7.9,13.89,car,31
+DLV-1026,2026-10-08,Pet Shop Amigo,Cajuru,9.6,3.73,Motorcycle,34
+DLV-1027,2026-10-09,Doce Sabor Confeitaria,Campo Comprido,19.0,23.9,Van,63
+DLV-1028,2026-10-09,Padaria Bom Dia,Portão,6.9,22.55,Van,36
+DLV-1029,2026-10-09,Farmácia Vida,Pinheirinho,13.9,2.15,Motorcycle,53
+DLV-1030,2026-10-09,Café do Bairro,Bigorrilho,4.4,9.7,Car,23
+DLV-1031,2026-10-09,Ateliê Flor,Água Verde,3.9 km,0.33,Motorcycle,22
+DLV-1032,2026-10-09,Studio Fit,Cajuru,10.5,4.86,Motorcycle,35
+DLV-1033,2026-10-10,Clínica Sorriso,Batel,0,16.84,Van,26
+DLV-1034,2026-10-10,Livraria Leitura,Rebouças,3.5,7.04,Car,18
+DLV-1035,2026-10-10,Café do Bairro,Pinheirinho,14.0,23.84,Van,63
+DLV-1036,2026-10-10,Pet Shop Amigo,Boqueirão,10.9,"10,91",Car,43
+DLV-1037,2026-10-10,Studio Fit,Santa Felicidade,13.0,1.29,Motorcycle,51
+DLV-1038,2026-10-10,Mercado Central,Cabral,6.5,-1.5,Van,34
+DLV-1039,2026-10-10,Doce Sabor Confeitaria,Cajuru,11.3,2.82,Motorcycle,46
+DLV-1040,2026-10-11,Ateliê Flor,Campo Comprido,18.9,4.85,Motorcycle,58
+DLV-1041,2026-10-11,Doce Sabor Confeitaria,CENTRO,1.9,2.69,Motorcycle,16
+DLV-1042,2026-10-11,Livraria Leitura,Tatuquara,24.4,8.47, Car  ,80
+DLV-1043,2026-10-11,Clínica Sorriso,Cidade Industrial,17.2,24.74,Van,71
